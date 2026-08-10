@@ -1,76 +1,67 @@
-# 🧱 Blocksmith
+# 🧱 Blocksmith — Block-Based Editor Monorepo
 
-Um poderoso ecossistema de ferramentas web, estruturado como um **Monorepo** moderno utilizando **Turborepo** e **PNPM**.
+Ecossistema monorepo para construção e edição de documentos estruturados em blocos (estilo Notion), utilizando **Turborepo**, **NestJS**, **Next.js** e **Tiptap**.
 
-<div align="center">
-  <!-- Adicione o link real de uma imagem do seu projeto aqui depois -->
-  <img src="https://raw.githubusercontent.com/DuuhRihedy/DuuhRihedy/main/assets/blocksmith-placeholder.png" alt="Blocksmith Demo" width="800">
-</div>
+![Status](https://img.shields.io/badge/Status-Em_Desenvolvimento-yellow?style=flat-square)
+![Turborepo](https://img.shields.io/badge/Turborepo-v2.4-EF4444?style=flat-square&logo=turborepo)
+![PNPM](https://img.shields.io/badge/pnpm-Workspaces-F69220?style=flat-square&logo=pnpm)
+![NestJS](https://img.shields.io/badge/NestJS-Backend-E0234E?style=flat-square&logo=nestjs)
+![Next.js](https://img.shields.io/badge/Next.js-Frontend-black?style=flat-square&logo=nextdotjs)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue?style=flat-square&logo=typescript)
 
-<br>
+---
 
-<div align="center">
-  ![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow?style=flat-square)
-  ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
-  ![Turborepo](https://img.shields.io/badge/Turborepo-EF4444?style=flat-square&logo=turborepo&logoColor=white)
-  ![pnpm](https://img.shields.io/badge/pnpm-F69220?style=flat-square&logo=pnpm&logoColor=white)
-</div>
+## 🎯 Sobre o Projeto
 
-## 🚀 Features
+O **Blocksmith** é um projeto de arquitetura avançada construído como um Monorepo modular. O objetivo é fornecer uma experiência de edição de texto rica baseada em blocos reutilizáveis, permitindo a criação de documentos, notas e conteúdos estruturados com navegação via comandos de teclado.
 
-- ✅ **Arquitetura Monorepo:** Código modularizado em múltiplos pacotes para maximizar o reuso.
-- ✅ **Alta Performance de Build:** Gerenciamento de tarefas em cache remoto e local com Turborepo.
-- ✅ **Pacotes Independentes:** Contém um pacote principal web (`@blocksmith/web`) e um editor isolado (`@blocksmith/editor`).
-- ✅ **Gerenciamento Eficiente:** Controle rigoroso de dependências com o PNPM (Workspaces).
+---
 
-## 🛠️ Tech Stack
-
-### Tooling & Arquitetura
-![Turborepo](https://img.shields.io/badge/Turborepo-EF4444?style=flat-square&logo=turborepo&logoColor=white)
-![PNPM](https://img.shields.io/badge/pnpm-F69220?style=flat-square&logo=pnpm&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)
-
-## ⚡ Quick Start
-
-### Pré-requisitos
-- Node.js (v20+)
-- pnpm (v9+)
-
-### Instalação
-
-1. Clone o repositório
-```bash
-git clone https://github.com/DuuhRihedy/blocksmith.git
-cd blocksmith
-```
-
-2. Instale as dependências (Na raiz do Monorepo)
-```bash
-pnpm install
-```
-
-3. Rodando o ecossistema (todos os pacotes)
-```bash
-pnpm run dev
-```
-
-Ou rode aplicações específicas:
-```bash
-# Rodar apenas a aplicação Web
-pnpm run dev:web
-
-# Rodar apenas o Editor
-pnpm run dev:editor
-```
-
-## 📁 Estrutura do Monorepo
+## 📦 Estrutura do Monorepo
 
 ```
 blocksmith/
-├── apps/              # Aplicações principais
-│   ├── web/           # (@blocksmith/web) Aplicação cliente principal
-│   └── editor/        # (@blocksmith/editor) Ferramenta de edição
-├── packages/          # Pacotes compartilhados (UI, Configs, Utils)
-├── package.json       # Orquestração do pnpm workspace
-└── turbo.json         # Pipeline de build do Turborepo
+├── apps/
+│   ├── api/             # API REST construída com NestJS + Prisma ORM
+│   └── web/             # Aplicação Frontend Next.js (@blocksmith/web)
+├── packages/
+│   └── editor/          # Pacote reutilizável do editor Tiptap (@blocksmith/editor)
+├── package.json         # Gerenciamento de scripts raiz e PNPM Workspaces
+└── turbo.json           # Pipelines de build e cache do Turborepo
+```
+
+---
+
+## ✨ Funcionalidades Principais
+
+- 📝 **Editor Estruturado em Blocos (`packages/editor`):** Construído sobre a engine Tiptap, oferecendo suporte a títulos, listas, citações, blocos de código e imagens.
+- ⚡ **Slash Commands Menu (`/`):** Menu suspenso acionado ao digitar `/` para inserção rápida de novos tipos de blocos sem tirar as mãos do teclado.
+- 🛠️ **Barra de Ferramentas Flutuante (`Toolbar.tsx`):** Opções de formatação rápida de texto selecionado (negrito, itálico, links, realce).
+- 🔄 **API NestJS de Documentos (`apps/api`):** Endpoints RESTful para criação, leitura, atualização e deleção (CRUD) de documentos persistidos via Prisma ORM.
+- 📤 **Menu de Exportação (`ExportMenu.tsx`):** Exportação dos documentos para diferentes formatos.
+
+---
+
+## 🚀 Como Executar o Projeto Localmente
+
+### Pré-requisitos
+- Node.js (v20 ou superior)
+- PNPM (v9 ou superior)
+
+### Passo a passo
+
+```bash
+# 1. Clone o repositório
+git clone https://github.com/DuuhRihedy/blocksmith.git
+cd blocksmith
+
+# 2. Instale as dependências de todos os pacotes via PNPM Workspaces
+pnpm install
+
+# 3. Execute o ambiente de desenvolvimento completo (API + Web) via Turborepo
+pnpm run dev
+
+# Ou execute apenas uma aplicação específica:
+# pnpm run dev:web
+# pnpm run dev:editor
 ```
