@@ -1,0 +1,729 @@
+/* ============================================
+   Blocksmith Editor — Core Styles
+   ============================================ */
+
+/* --- CSS Variables (customizable by consumer) --- */
+:root {
+  --bs-bg: #0a0a0a;
+  --bs-bg-secondary: #141414;
+  --bs-bg-hover: #1a1a1a;
+  --bs-bg-elevated: #1e1e1e;
+  --bs-text: #e5e5e5;
+  --bs-text-muted: #737373;
+  --bs-text-faint: #525252;
+  --bs-accent: #f59e0b;
+  --bs-accent-hover: #d97706;
+  --bs-border: #262626;
+  --bs-border-focus: #404040;
+  --bs-radius: 8px;
+  --bs-radius-sm: 4px;
+  --bs-font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --bs-font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --bs-transition: 150ms ease;
+}
+
+/* --- Editor Wrapper --- */
+.blocksmith-wrapper {
+  position: relative;
+  width: 100%;
+  font-family: var(--bs-font-body);
+}
+
+/* --- Main Editor Content --- */
+.blocksmith-editor {
+  color: var(--bs-text);
+  font-size: 1rem;
+  line-height: 1.75;
+  outline: none;
+  min-height: 200px;
+  padding: 1rem 0;
+  caret-color: var(--bs-accent);
+}
+
+.blocksmith-editor>*:first-child {
+  margin-top: 0;
+}
+
+/* Placeholder */
+.blocksmith-editor p.is-editor-empty:first-child::before {
+  color: var(--bs-text-faint);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.blocksmith-editor .is-empty::before {
+  color: var(--bs-text-faint);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* --- Typography --- */
+.blocksmith-editor h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 2rem 0 0.75rem;
+  letter-spacing: -0.025em;
+}
+
+.blocksmith-editor h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 1.75rem 0 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.blocksmith-editor h3 {
+  font-size: 1.375rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.blocksmith-editor p {
+  margin: 0.5rem 0;
+}
+
+.blocksmith-editor strong {
+  font-weight: 600;
+  color: #fff;
+}
+
+.blocksmith-editor em {
+  font-style: italic;
+}
+
+.blocksmith-editor s {
+  text-decoration: line-through;
+  color: var(--bs-text-muted);
+}
+
+/* --- Inline Code --- */
+.blocksmith-editor code {
+  background: var(--bs-bg-elevated);
+  border: 1px solid var(--bs-border);
+  border-radius: var(--bs-radius-sm);
+  color: var(--bs-accent);
+  font-family: var(--bs-font-mono);
+  font-size: 0.875em;
+  padding: 0.15em 0.4em;
+}
+
+/* --- Code Block --- */
+.blocksmith-code-block {
+  background: var(--bs-bg-secondary);
+  border: 1px solid var(--bs-border);
+  border-radius: var(--bs-radius);
+  font-family: var(--bs-font-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 1rem 0;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  tab-size: 2;
+}
+
+.blocksmith-code-block code {
+  background: none;
+  border: none;
+  color: var(--bs-text);
+  font-size: inherit;
+  padding: 0;
+}
+
+/* --- Blockquote --- */
+.blocksmith-editor blockquote {
+  border-left: 3px solid var(--bs-accent);
+  margin: 1rem 0;
+  padding: 0.5rem 0 0.5rem 1.25rem;
+  color: var(--bs-text-muted);
+  font-style: italic;
+}
+
+.blocksmith-editor blockquote p {
+  margin: 0.25rem 0;
+}
+
+/* --- Lists --- */
+.blocksmith-editor ul,
+.blocksmith-editor ol {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.blocksmith-editor li {
+  margin: 0.25rem 0;
+}
+
+.blocksmith-editor li p {
+  margin: 0;
+}
+
+.blocksmith-editor ul>li {
+  list-style-type: disc;
+}
+
+.blocksmith-editor ul>li>ul>li {
+  list-style-type: circle;
+}
+
+.blocksmith-editor ol>li {
+  list-style-type: decimal;
+}
+
+/* --- Task List --- */
+.blocksmith-task-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.blocksmith-task-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.blocksmith-task-list li>label {
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.blocksmith-task-list li>label>input[type="checkbox"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--bs-border-focus);
+  border-radius: var(--bs-radius-sm);
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: all var(--bs-transition);
+}
+
+.blocksmith-task-list li>label>input[type="checkbox"]:checked {
+  background: var(--bs-accent);
+  border-color: var(--bs-accent);
+}
+
+.blocksmith-task-list li>label>input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.blocksmith-task-list li[data-checked="true"]>div>p {
+  text-decoration: line-through;
+  color: var(--bs-text-muted);
+}
+
+/* --- Horizontal Rule --- */
+.blocksmith-editor hr {
+  border: none;
+  border-top: 1px solid var(--bs-border);
+  margin: 1.5rem 0;
+}
+
+/* --- Image --- */
+.blocksmith-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--bs-radius);
+  margin: 1rem 0;
+  cursor: pointer;
+  transition: opacity var(--bs-transition);
+}
+
+.blocksmith-image:hover {
+  opacity: 0.9;
+}
+
+.blocksmith-image.ProseMirror-selectednode {
+  outline: 2px solid var(--bs-accent);
+  outline-offset: 2px;
+}
+
+/* --- Link --- */
+.blocksmith-link {
+  color: var(--bs-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  transition: color var(--bs-transition);
+}
+
+.blocksmith-link:hover {
+  color: var(--bs-accent-hover);
+}
+
+/* ============================================
+   Toolbar (Bubble Menu)
+   ============================================ */
+.blocksmith-bubble-menu {
+  z-index: 50;
+}
+
+.blocksmith-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--bs-bg-elevated);
+  border: 1px solid var(--bs-border);
+  border-radius: var(--bs-radius);
+  padding: 4px;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.blocksmith-toolbar-buttons {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.blocksmith-toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--bs-radius-sm);
+  background: transparent;
+  color: var(--bs-text-muted);
+  cursor: pointer;
+  transition: all var(--bs-transition);
+}
+
+.blocksmith-toolbar-btn:hover {
+  background: var(--bs-bg-hover);
+  color: var(--bs-text);
+}
+
+.blocksmith-toolbar-btn.is-active {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--bs-accent);
+}
+
+.blocksmith-toolbar-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.blocksmith-toolbar-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--bs-border);
+  margin: 0 4px;
+}
+
+/* Link Input */
+.blocksmith-link-input {
+  display: flex;
+  gap: 4px;
+  padding: 4px 0 0;
+}
+
+.blocksmith-link-input input {
+  flex: 1;
+  background: var(--bs-bg-secondary);
+  border: 1px solid var(--bs-border);
+  border-radius: var(--bs-radius-sm);
+  color: var(--bs-text);
+  font-family: var(--bs-font-body);
+  font-size: 0.8125rem;
+  padding: 4px 8px;
+  outline: none;
+  transition: border-color var(--bs-transition);
+}
+
+.blocksmith-link-input input:focus {
+  border-color: var(--bs-accent);
+}
+
+.blocksmith-link-input button {
+  background: var(--bs-accent);
+  border: none;
+  border-radius: var(--bs-radius-sm);
+  color: #000;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  transition: background var(--bs-transition);
+}
+
+.blocksmith-link-input button:hover {
+  background: var(--bs-accent-hover);
+}
+
+/* ============================================
+   Slash Menu
+   ============================================ */
+.blocksmith-slash-menu {
+  position: absolute;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  max-height: 320px;
+  width: 280px;
+  overflow-y: auto;
+  background: var(--bs-bg-elevated);
+  border: 1px solid var(--bs-border);
+  border-radius: var(--bs-radius);
+  padding: 6px;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+  animation: bs-slash-in 120ms ease-out;
+}
+
+@keyframes bs-slash-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.blocksmith-slash-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--bs-text);
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--bs-transition);
+}
+
+.blocksmith-slash-menu-item:hover,
+.blocksmith-slash-menu-item.is-selected {
+  background: var(--bs-bg-hover);
+}
+
+.blocksmith-slash-menu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--bs-bg-secondary);
+  border: 1px solid var(--bs-border);
+  border-radius: 6px;
+  color: var(--bs-text-muted);
+  flex-shrink: 0;
+}
+
+.blocksmith-slash-menu-item.is-selected .blocksmith-slash-menu-icon,
+.blocksmith-slash-menu-item:hover .blocksmith-slash-menu-icon {
+  color: var(--bs-accent);
+  border-color: var(--bs-accent);
+}
+
+.blocksmith-slash-menu-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.blocksmith-slash-menu-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.blocksmith-slash-menu-desc {
+  font-size: 0.75rem;
+  color: var(--bs-text-muted);
+  line-height: 1.3;
+}
+
+/* --- Scrollbar --- */
+.blocksmith-slash-menu::-webkit-scrollbar {
+  width: 4px;
+}
+
+.blocksmith-slash-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.blocksmith-slash-menu::-webkit-scrollbar-thumb {
+  background: var(--bs-border);
+  border-radius: 2px;
+}
+
+/* --- Selection --- */
+.blocksmith-editor ::selection {
+  background: rgba(245, 158, 11, 0.25);
+}
+
+/* --- Dropcursor --- */
+.ProseMirror-dropcursor {
+  color: var(--bs-accent) !important;
+}
+
+/* --- Gapcursor --- */
+.ProseMirror-gapcursor::after {
+  border-top-color: var(--bs-accent) !important;
+}
+
+/* ============================================
+   Color Picker
+   ============================================ */
+.blocksmith-color-indicator {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.blocksmith-color-picker {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  padding: 4px 0 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.blocksmith-color-swatch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  border: none;
+  border-radius: var(--bs-radius-sm);
+  background: transparent;
+  color: var(--bs-text-muted);
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: all var(--bs-transition);
+  text-align: left;
+}
+
+.blocksmith-color-swatch:hover {
+  background: var(--bs-bg-hover);
+  color: var(--bs-text);
+}
+
+.blocksmith-color-swatch.is-active {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--bs-accent);
+}
+
+.blocksmith-color-dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.blocksmith-color-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ============================================
+   MenuBar (Fixed Top Toolbar — Word style)
+   ============================================ */
+.blocksmith-menubar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--bs-bg-secondary);
+  border: 1px solid var(--bs-border);
+  border-radius: var(--bs-radius);
+  margin-bottom: 8px;
+  padding: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.blocksmith-menubar-inner {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+
+.blocksmith-menubar-group {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.blocksmith-menubar-sep {
+  width: 1px;
+  height: 22px;
+  background: var(--bs-border);
+  margin: 0 5px;
+  flex-shrink: 0;
+}
+
+.blocksmith-menubar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: var(--bs-radius-sm);
+  background: transparent;
+  color: var(--bs-text-muted);
+  cursor: pointer;
+  transition: all var(--bs-transition);
+  position: relative;
+}
+
+.blocksmith-menubar-btn:hover {
+  background: var(--bs-bg-hover);
+  color: var(--bs-text);
+}
+
+.blocksmith-menubar-btn.is-active {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--bs-accent);
+}
+
+.blocksmith-menubar-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.blocksmith-menubar-btn:disabled:hover {
+  background: transparent;
+  color: var(--bs-text-muted);
+}
+
+.blocksmith-menubar-color-bar {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.blocksmith-menubar-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  background: var(--bs-bg-elevated);
+  border: 1px solid var(--bs-border);
+  border-radius: var(--bs-radius);
+  padding: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  z-index: 50;
+  min-width: 180px;
+  animation: bs-slash-in 120ms ease-out;
+}
+
+.blocksmith-menubar-dropdown-title {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--bs-text-faint);
+  margin-bottom: 6px;
+  padding: 0 2px;
+}
+
+.blocksmith-menubar-color-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 3px;
+}
+
+.blocksmith-menubar-color-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid transparent;
+  border-radius: var(--bs-radius-sm);
+  background: transparent;
+  color: var(--bs-text-muted);
+  cursor: pointer;
+  transition: all var(--bs-transition);
+}
+
+.blocksmith-menubar-color-cell:hover {
+  border-color: var(--bs-text-muted);
+  transform: scale(1.15);
+}
+
+.blocksmith-menubar-color-cell.is-active {
+  border-color: var(--bs-accent);
+  box-shadow: 0 0 0 1px var(--bs-accent);
+}
+
+.blocksmith-menubar-color-cell .blocksmith-color-dot {
+  width: 16px;
+  height: 16px;
+}
+
+.blocksmith-menubar-link-row {
+  display: flex;
+  gap: 4px;
+}
+
+.blocksmith-menubar-link-row input {
+  flex: 1;
+  background: var(--bs-bg-secondary);
+  border: 1px solid var(--bs-border);
+  border-radius: var(--bs-radius-sm);
+  color: var(--bs-text);
+  font-family: var(--bs-font-body);
+  font-size: 0.8125rem;
+  padding: 5px 8px;
+  outline: none;
+  min-width: 180px;
+  transition: border-color var(--bs-transition);
+}
+
+.blocksmith-menubar-link-row input:focus {
+  border-color: var(--bs-accent);
+}
+
+.blocksmith-menubar-link-row button {
+  background: var(--bs-accent);
+  border: none;
+  border-radius: var(--bs-radius-sm);
+  color: #000;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  transition: background var(--bs-transition);
+}
+
+.blocksmith-menubar-link-row button:hover {
+  background: var(--bs-accent-hover);
+}
